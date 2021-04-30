@@ -20,5 +20,5 @@ from django.urls import path, include
 
 urlpatterns = [    
     path('', include('hello.urls')),
-    path('mvp1/', include('mvp1.urls')),
+#    path('mvp1/', include('mvp1.urls')),
 ]
