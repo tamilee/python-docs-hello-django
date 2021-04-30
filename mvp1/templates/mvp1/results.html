@@ -1,0 +1,68 @@
+{% load static %}
+<head>
+<link rel="stylesheet" type="text/css" href="{% static '/mvp1/css/style.css' %}">
+<!--
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+-->
+        <!-- MiniPreview stuff here -->
+        <link rel="stylesheet" type="text/css" href="{% static '/mvp1/css/jquery.minipreview.css' %}">
+	<script src="{% static '/static/mvp1/js/jquery.minipreview.js' %}"></script>
+        <script>
+            $(function() {
+                $('#p1 a').miniPreview({ prefetch: 'pageload' });
+                $('#p2 a').miniPreview({ prefetch: 'parenthover' });
+                $('#p3 a').miniPreview({ prefetch: 'none' });
+            });
+        </script>
+</head>
+<body>
+<div class="wrap">
+    <h3>AI based semantic search</h3>
+    <dl>
+        <dt>You can search for climate data in ~9000 urls by querying with text or url (AI based semantic search):</dt>
+        <dd>e.g. <i>"energy data in US" , "https://en.wikipedia.org/wiki/Climate_of_Dhaka" , "green jobs" ,"regenerative
+            agriculture in India" , "satellite data Amazon rainforest"</i></dd>
+	<dt>
+    </dl>
+<form action="search" method="post" id="searchform">{% csrf_token %}
+   <div class="search">
+      <input name="query" type="text" class="searchTerm" placeholder="eg. climate impact in Africa">
+      <button type="submit" form="searchform" value="submit"  class="searchButton">
+	 <img src="/static/mvp1/images/search.png" alt="Icon Free Image - Search Button Png White Clipart@pikpng.com" width="24" height="24"/>
+	 <!--
+        <i class="fa fa-search"></i>
+	 -->
+     </button>
+   </div>
+<div class="results_div" id="p3">
+	<h4>Search Results for query = "{{query}}"</h4>
+    <table style="font-family:open-sans,sans-serif;font-size:14px;">
+	{% for resDict  in result_list  %}
+        <tr style="font-weight:bold;padding-right:20px; padding-left:20px;">
+		<td>{{ resDict.rank }}</td>
+		<td>
+		    <a href="{{ resDict.url }}" class="mini-preview-anchor">{{ resDict.name}}</a>
+		    <!--
+		    <div class="box">
+			    <iframe src="{{ resDict.url }}" width = "700px" height = "100px">
+     			</iframe>
+  		    </div>
+		    -->
+                </td>
+        </tr>
+	<tr style="padding-right:20px; padding-left:20px;">
+            <td></td>
+            <td>
+                <small>
+		  {{ resDict.snippet }}
+                </small>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div> <!-- results_div -->
+
+</div>
+</form>
+</body>

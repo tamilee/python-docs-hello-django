@@ -1,0 +1,43 @@
+{% load static %}
+
+<head>
+    <title>Climate Data Semantic Search</title>
+    <style> input{width: 100%;} .box{display: none; width: 100%;} a:hover + .box, .box:hover{display: block; position:
+        relative; z-index: 100;}
+    </style>
+</head>
+
+<link rel="stylesheet" type="text/css" href="{% static '/mvp1/css/style.css' %}">
+<body>
+<div style="margin: auto; font-family:open-sans,sans-serif;font-size:16px;overflow-x:auto;padding-right:10px; padding-left:10px;width:90%;">
+    <h3>About</h3>
+    <dl>
+        <dt>We are building <a href=https://www.climatedatahub.io>ClimateDataHub</a> - a place to easily discover,
+            upload, curate, enrich, create and download climate datasets.
+        </dt>
+        <dd><a href=http://data.protea.earth>Sign up</a> to try our beta or help out.</dd>
+        <dt>Tell us what data you'd like to see:</dt>
+        <dd>Energy ; Food & Water ; Infrastructure & Transportation ; Risk & Resilience ; Nature Conservation ; Policy ;
+            Health ; Finance & Investment ; Commerce & Manufacturing ; Other.
+        </dd>
+    </dl>
+    <h3>AI based semantic search</h3>
+    <dl>
+        <dt>You can search for climate data in ~9000 urls by querying with text or url (AI based semantic search):</dt>
+        <dd>e.g. <i>"energy data in US" , "https://en.wikipedia.org/wiki/Climate_of_Dhaka" , "green jobs" ,"regenerative
+            agriculture in India" , "satellite data Amazon rainforest"</i></dd>
+	<dt>
+            <form action="search" method="post" id="searchform"> {% csrf_token %}
+		<br/>
+                <div>
+                    <div class="search">
+                        <input name="query" type="text" class="searchTerm" placeholder="eg. climate impact in Africa">
+                        <button type="submit" form="searchform" value="submit"  class="searchButton">
+                            <img src="/static/mvp1/images/search.png" alt="Icon Free Image - Search Button Png White Clipart@pikpng.com" width="24" height="24"/>
+                        </button>
+                    </div>
+                </div>
+            </form>
+	</dt>
+    </dl>
+</div>
